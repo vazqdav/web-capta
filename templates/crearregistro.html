@@ -460,7 +460,16 @@
                                     </div>
                                     <div class="input-field">
                                         <label>Día de la Semana</label>
-                                        <input type="text" name="dia_semana" placeholder="Ingresa el día">
+                                        <select name="dia_semana" required>
+                                            <option disabled selected>Selecciona una Opción</option>
+                                            <option value="Lunes">Lunes</option>
+                                            <option value="Martes">Martes</option>
+                                            <option value="Miercoles">Miercoles</option>
+                                            <option value="Jueves">Jueves</option>
+                                            <option value="viernes">Viernes</option>
+                                            <option value="Sabado">Sabado</option>
+                                            <option value="Domingo">Domingo</option>
+                                        </select>
                                     </div>
                                     <div class="input-field">
                                         <label>Motivo de la Atención</label>
@@ -1673,10 +1682,10 @@
                                 </div>
                             </div>
                             <div class="details ID">
-                                <span class="title">OBSERVACIÓNES</span>
+                                <span class="title">OBSERVACIONES</span>
                                 <div class="fields">
                                     <div class="input-field">
-                                        <label>Observaciónes</label>
+                                        <label>Observaciones</label>
                                         <input type="text" name="especifiqueotros" id="especifiqueotros" placeholder="Especifique">
                                     </div>
                                     <div class="input-field">
