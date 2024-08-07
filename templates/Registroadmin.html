@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros Archivados</title>
+    <link rel="icon" href="https://acapulco.gob.mx/wp-content/uploads/2019/04/favicon-300x300.png" sizes="192x192" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #e6e8ed;
+            color: #666666;
+            font-family: "Montserrat", sans-serif;
+        }
+        .header {
+            grid-area: header;
+            height: 70px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .header-left span {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .header-left input {
+            border: none;
+            padding: 6px;
+            outline: none;
+            border-bottom: 1px solid #9c9c9c; /* Cambia el color del borde cuando está enfocado */
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-right a {
+            text-decoration: none;
+            color: #4d4c4c;
+        }
+
+        .project-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px 20px;
+            margin: 0;
+            list-style: none;
+        }
+
+        .project-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+            width: calc(19.3% - 8px); /* Ajusta el tamaño de las tarjetas */
+        }
+
+        .logo-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .logo-row img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .title-row h3 {
+            margin: 5px 0;
+            font-size: 18px;
+            color: #333333;
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .links {
+            display: flex;
+            align-items: center;
+        }
+
+        .links a {
+            margin-left: 5px;
+            font-size: 14px;
+            color: #666666;
+            text-decoration: none;
+        }
+
+        .desc-row p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666666;
+            max-width: 220px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .progress-row {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .value-label {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333333;
+        }
+
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .footer-row .days {
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-row .days i {
+            margin-right: 5px;
+        }
+
+        .footer-row .users img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+    </style>
+    <style>
+        .logo-row img:hover {
+            transform: scale(2.1);
+            z-index: 2;
+            border-radius: 2px;
+            margin-left: 37px;
+            cursor: pointer;
+        }
+
+        .logo-row img {
+            width: 70px;
+            height: 70px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="material-icons-outlined">search</span>
+            <input type="text" id="searchInput" placeholder="Buscar registro">
+        </div>
+        <div class="header-right">
+            <a href="/admin">
+                <span style="margin-right: 40px;" class="material-icons-outlined">home</span>
+            </a>
+        </div>
+        <div class="header-right">
+            <a href="/perfil">
+                <span class="material-icons-outlined">account_circle</span>
+            </a>
+        </div>
+    </header>
+
+    <ul class="project-list">
+        {% for registro in registros %}
+        <li class="project-item">
+            <div class="logo-row">
+                <img src="{{ url_for('uploaded_file', filename=registro.imagenes[0]) }}" alt="Imagen del registro" />
+            </div>
+            <div class="title-row">
+                <h3>{{ registro.nombre_paciente }}</h3>
+                <div class="links">
+                    <i class="fa fa-external-link icon" aria-hidden="true"></i>
+                    <a href="#">ID: {{ registro._id }}</a>
+                </div>
+            </div>
+            <div class="desc-row">
+                <p>Motivo: {{ registro.motivo_atencion }}</p>
+                <p>Paramédico: {{ registro.usuario_nombre }}</p>
+                <p>Fecha: {{ registro.fecha }}</p>
+            </div>
+            <div class="progress-row">
+                <p class="value-label" style="width:44%" data-value="50"></p>
+                <progress max="50" value="50" data-value="50">50%</progress>
+            </div>
+            <div class="footer-row">
+                <div class="days">
+                    <a style="cursor: pointer; color: #246dec; text-decoration: none;" href="{{ url_for('ver_masadmin', registro_id=registro._id) }}">
+                        <i class="fa fa-clock-o icon" aria-hidden="true"></i> Ver más
+                    </a>
+                </div>
+                <div class="users">
+                    <!-- Puedes añadir imágenes de usuarios aquí si es necesario -->
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="pagination">
+        {% if page > 1 %}
+        <a href="{{ url_for('mostrar_registros', page=page-1) }}" class="pagination-button prev">«
+            Anterior</a>
+        {% endif %}
+
+        {% for p in range(1, total_pages + 1) %}
+        <a href="{{ url_for('mostrar_registros', page=p) }}"
+            class="pagination-button {{ 'active' if p == page else '' }}">{{ p }}</a>
+        {% endfor %}
+
+        {% if page < total_pages %} <a href="{{ url_for('mostrar_registros', page=page+1) }}"
+            class="pagination-button next">Siguiente »</a>
+            {% endif %}
+    </div>
+</body>
+</html>
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin: 0 5px;
+        position: fixed;
+        bottom: 0;
+        width: 120%;
+        background-color: transparent;
+        /* Fondo blanco para visibilidad */
+        border-top: 1px solid transparent;
+        /* Línea superior */
+        padding: 5px 0;
+        /* Espaciado */
+
+    }
+
+    .pagination-button {
+        display: inline-block;
+        padding: 5px 9px;
+        margin: 0 2px;
+        text-align: center;
+        text-decoration: none;
+        color: #1a73e8;
+        border: 1px solid #dcdcdc;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .pagination-button:hover {
+        background-color: #f1f1f1;
+        border-color: #c6c6c6;
+    }
+
+    .pagination-button.active {
+        background-color: #1a73e8;
+        color: #fff;
+        border-color: #1a73e8;
+    }
+
+    .pagination-button.prev,
+    .pagination-button.next {
+        font-weight: bold;
+    }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('searchInput');
+        const projectList = document.querySelector('.project-list');
+
+        searchInput.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                performSearch(searchInput.value);
+            }
+        });
+
+        function performSearch(query) {
+            fetch('/busca_usuario', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ search_query: query })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Agrega esto para verificar los datos recibidos
+                updateProjectList(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function updateProjectList(data) {
+            projectList.innerHTML = ''; // Clear the list before adding new results
+
+            if (data.length === 0) {
+                projectList.innerHTML = '<li>No se encontraron resultados.</li>';
+                return;
+            }
+
+            data.forEach(registro => {
+                const listItem = document.createElement('li');
+                listItem.className = 'project-item';
+
+                listItem.innerHTML = `
+                    <div class="logo-row">
+                        <img src="${registro.imagenes[0]}" alt="Imagen del registro" />
+                        <div class="icon">
+                            <i class="fa fa-ellipsis-h icon" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="title-row">
+                        <h3 style="max-width: 150px; font-size: 15px;">${registro.nombre_paciente}</h3>
+                        <div class="links">
+                            <i class="fa fa-external-link icon" aria-hidden="true"></i>
+                            <a style="margin: 0;" href="#">ID: ${registro._id}</a>
+                        </div>
+                    </div>
+                    <div class="desc-row">
+                        <p>Motivo: ${registro.motivo_atencion}</p>
+                        <p style="max-width: 220px;">Paramédico: ${registro.usuario_nombre}</p>
+                        <p>Fecha: ${registro.fecha}</p>
+                    </div>
+                    <div class="progress-row">
+                        <p class="value-label" style="width:44%" data-value="50"></p>
+                        <progress max="50" value="50" data-value="50">50%</progress>
+                    </div>
+                    <div class="footer-row">
+                        <div class="days">
+                            <a style="cursor: pointer; color: #246dec; text-decoration: none;" href="/ver_mas/${registro._id}">
+                                <i class="fa fa-clock-o icon" aria-hidden="true"></i> Ver más
+                            </a>
+                        </div>
+                        <div class="users">
+                        </div>
+                    </div>
+                `;
+
+                projectList.appendChild(listItem);
+            });
+        }
+    });
+</script>
