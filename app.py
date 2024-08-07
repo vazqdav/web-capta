@@ -669,7 +669,7 @@ def uploaded_image(filename):
 @app.route('/ver_registros')
 def ver_registros():
     page = int(request.args.get('page', 1))  # Obtener la página actual, por defecto es 1
-    per_page = 9  # Número de registros por página
+    per_page = 9999999  # Número de registros por página
     skip = (page - 1) * per_page
 
     registros = list(registros_collection.find().skip(skip).limit(per_page))

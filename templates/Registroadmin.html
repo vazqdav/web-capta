@@ -226,55 +226,9 @@
         </li>
         {% endfor %}
     </ul>
+    
 </body>
 </html>
-<style>
-    .pagination {
-        display: flex;
-        justify-content: center;
-        margin: 0 5px;
-        position: fixed;
-        bottom: 0;
-        width: 120%;
-        background-color: transparent;
-        /* Fondo blanco para visibilidad */
-        border-top: 1px solid transparent;
-        /* Línea superior */
-        padding: 5px 0;
-        /* Espaciado */
-
-    }
-
-    .pagination-button {
-        display: inline-block;
-        padding: 5px 9px;
-        margin: 0 2px;
-        text-align: center;
-        text-decoration: none;
-        color: #1a73e8;
-        border: 1px solid #dcdcdc;
-        border-radius: 4px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-    }
-
-    .pagination-button:hover {
-        background-color: #f1f1f1;
-        border-color: #c6c6c6;
-    }
-
-    .pagination-button.active {
-        background-color: #1a73e8;
-        color: #fff;
-        border-color: #1a73e8;
-    }
-
-    .pagination-button.prev,
-    .pagination-button.next {
-        font-weight: bold;
-    }
-</style>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const searchInput = document.getElementById('searchInput');
