@@ -11,8 +11,8 @@ import os
 
 app = Flask(__name__)
 
-app.secret_key = "capta"
-client = MongoClient("mongodb+srv://capta782024:captabasededatos@cluster0.7eadi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+app.secret_key = "advpjsh"
+client = MongoClient("mongodb+srv://davidnet:chetocheto@cluster0.0fkdavr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = client['CAPTA']
 collection = db['Paramedicos']
 registros_collection = db['Registros']
