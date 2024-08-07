@@ -226,21 +226,6 @@
         </li>
         {% endfor %}
     </ul>
-    <div class="pagination">
-        {% if page > 1 %}
-        <a href="{{ url_for('mostrar_registros', page=page-1) }}" class="pagination-button prev">«
-            Anterior</a>
-        {% endif %}
-
-        {% for p in range(1, total_pages + 1) %}
-        <a href="{{ url_for('mostrar_registros', page=p) }}"
-            class="pagination-button {{ 'active' if p == page else '' }}">{{ p }}</a>
-        {% endfor %}
-
-        {% if page < total_pages %} <a href="{{ url_for('mostrar_registros', page=page+1) }}"
-            class="pagination-button next">Siguiente »</a>
-            {% endif %}
-    </div>
 </body>
 </html>
 <style>
